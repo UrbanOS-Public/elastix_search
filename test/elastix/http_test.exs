@@ -15,7 +15,7 @@ defmodule Elastix.HTTPTest do
   end
 
   test "get should respond with 200" do
-    {_, response} = HTTP.get(@test_url, [])
+    {_, response} = HTTP.get(@test_url, [], [ssl: [{:versions, [:"tlsv1.2"]}]])
     assert response.status_code == 200
   end
 

@@ -38,7 +38,7 @@ defmodule Elastix.HTTP do
       headers: process_request_headers(full_headers),
       body: process_request_body(body),
       options: options
-    }
+    } |> dbg()
 
     apply(m, f, [
       __MODULE__,
