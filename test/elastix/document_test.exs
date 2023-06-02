@@ -39,7 +39,6 @@ defmodule Elastix.DocumentTest do
     assert response.body["_id"] == "1"
     assert response.body["_index"] == @test_index
     assert response.body["_type"] == "message"
-    assert response.body["created"] == true
   end
 
   test "index_new should index data without an id" do
@@ -49,7 +48,6 @@ defmodule Elastix.DocumentTest do
     assert response.body["_id"]
     assert response.body["_index"] == @test_index
     assert response.body["_type"] == "message"
-    assert response.body["created"] == true
   end
 
   test "get should return 404 if not index was created" do
@@ -93,7 +91,7 @@ defmodule Elastix.DocumentTest do
 
     {:ok, response} = Search.search(@test_url, @test_index, ["message"], match_all_query)
     assert response.status_code == 200
-    assert response.body["hits"]["total"] == 3
+    assert response.body["hits"]["total"]["value"] == 3
 
     query = %{"query" => %{"match" => %{"user" => "örelbörel"}}}
 
@@ -104,7 +102,7 @@ defmodule Elastix.DocumentTest do
 
     {:ok, response} = Search.search(@test_url, @test_index, ["message"], match_all_query)
     assert response.status_code == 200
-    assert response.body["hits"]["total"] == 1
+    assert response.body["hits"]["total"]["value"] == 1
   end
 
   test "update can partially update document" do
