@@ -1,13 +1,13 @@
 defmodule Elastix.Mixfile do
   use Mix.Project
 
-  @source_url "https://github.com/werbitzky/elastix"
+  @source_url "https://github.com/UrbanOS-Public/elastix_search"
   @version "1.0.0"
 
   def project do
     [
-      app: :elastix,
-      name: "Elastix",
+      app: :elastix_search,
+      name: "Elastix Search",
       version: @version,
       elixir: "~> 1.14",
       build_embedded: Mix.env() == :prod,
@@ -40,10 +40,10 @@ defmodule Elastix.Mixfile do
     [
       description: "A DSL-free Elastic / Elasticsearch client for Elixir.",
       files: ["lib", "mix.exs", "README.md", "CHANGELOG.md", "LICENSE"],
-      maintainers: ["El Werbitzky", "evuez <helloevuez@gmail.com>"],
+      maintainers: ["UrbanOS"],
       licenses: ["WTFPL-2"],
       links: %{
-        "Changelog" => "https://hexdocs.pm/elastix/changelog.html",
+        "Changelog" => "https://hexdocs.pm/elastix_search/changelog.html",
         "GitHub" => @source_url
       }
     ]
