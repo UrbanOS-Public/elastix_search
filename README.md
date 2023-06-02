@@ -137,7 +137,7 @@ end
 You need Elasticsearch running locally on port 9200. A quick way of doing so is via Docker:
 
 ```
-$ docker run -p 9200:9200 -it --rm elasticsearch:5.1.2
+$ docker run -p 9200:9200 -it --rm elasticsearch:7.4.2
 ```
 
 Then clone the repo and fetch its dependencies:

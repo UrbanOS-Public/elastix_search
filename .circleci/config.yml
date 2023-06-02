@@ -16,7 +16,7 @@ shared: &shared
     # Wait for Elasticsearch
     - run:
         command: |
-          while ! curl -sS --fail http://localhost:9200 > /dev/null 2>&1; do
+          while ! curl -sS --fail https://localhost:9200 > /dev/null 2>&1; do
             sleep 1
           done
 

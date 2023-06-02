@@ -45,29 +45,18 @@ defmodule Elastix.Mapping do
   @spec get(
           elastic_url :: String.t(),
           index_names :: String.t() | list,
-          type_names :: String.t() | list,
           query_params :: Keyword.t()
         ) :: HTTP.resp()
-  def get(elastic_url, index_names, type_names, query_params \\ [])
+  def get(elastic_url, index_names, query_params \\ [])
 
-  def get(elastic_url, index_names, type_names, query_params)
-      when is_list(type_names) and is_list(index_names) do
-    prepare_url(elastic_url, make_path(index_names, type_names, query_params))
+  def get(elastic_url, index_names, query_params)
+      when is_list(index_names) do
+    prepare_url(elastic_url, make_path(index_names, [], query_params))
     |> HTTP.get()
   end
 
-  def get(elastic_url, index_names, type_name, query_params)
-      when is_list(index_names) do
-    get(elastic_url, index_names, [type_name], query_params)
-  end
-
-  def get(elastic_url, index_name, type_names, query_params)
-      when is_list(type_names) do
-    get(elastic_url, [index_name], type_names, query_params)
-  end
-
-  def get(elastic_url, index_name, type_name, query_params),
-    do: get(elastic_url, [index_name], [type_name], query_params)
+  def get(elastic_url, index_name, query_params),
+    do: get(elastic_url, [index_name], query_params)
 
   @doc """
   Gets info on every mapping.
@@ -110,9 +99,14 @@ defmodule Elastix.Mapping do
   @doc false
   def make_path(index_names, type_names, query_params) do
     index_names = Enum.join(index_names, ",")
-    type_names = Enum.join(type_names, ",")
 
-    path = "/#{index_names}/_mapping/#{type_names}"
+    path =
+      if Enum.any?(type_names) do
+        type_names = Enum.join(type_names, ",")
+        "/#{index_names}/_mapping/#{type_names}"
+      else
+        "/#{index_names}"
+      end
 
     case query_params do
       [] -> path
@@ -134,7 +128,7 @@ defmodule Elastix.Mapping do
   def make_all_path(type_names, query_params) do
     type_names = Enum.join(type_names, ",")
 
-    path = "/_mapping/#{type_names}"
+    path = "/#{type_names}"
 
     case query_params do
       [] -> path

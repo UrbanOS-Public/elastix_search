@@ -1,15 +1,15 @@
 defmodule Elastix.Mixfile do
   use Mix.Project
 
-  @source_url "https://github.com/werbitzky/elastix"
-  @version "0.10.0"
+  @source_url "https://github.com/UrbanOS-Public/elastix_search"
+  @version "1.0.0"
 
   def project do
     [
-      app: :elastix,
-      name: "Elastix",
+      app: :elastix_search,
+      name: "Elastix Search",
       version: @version,
-      elixir: "~> 1.6",
+      elixir: "~> 1.14",
       build_embedded: Mix.env() == :prod,
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
@@ -27,12 +27,12 @@ defmodule Elastix.Mixfile do
 
   defp deps do
     [
-      {:ex_doc, ">= 0.0.0", only: :dev, runtime: false},
-      {:credo, "~> 0.6", only: [:dev, :test]},
-      {:mix_test_watch, "~> 0.3", only: [:test, :dev]},
-      {:poison, "~> 3.0 or ~> 4.0", optional: true},
-      {:httpoison, "~> 1.4"},
-      {:retry, "~> 0.8"}
+      {:ex_doc, "~> 0.29", only: :dev, runtime: false},
+      {:credo, "~> 1.7", only: [:dev, :test]},
+      {:mix_test_watch, "~> 1.1", only: [:test, :dev]},
+      {:poison, "~> 5.0", optional: true},
+      {:httpoison, "~> 2.1"},
+      {:retry, "~> 0.18"}
     ]
   end
 
@@ -40,10 +40,10 @@ defmodule Elastix.Mixfile do
     [
       description: "A DSL-free Elastic / Elasticsearch client for Elixir.",
       files: ["lib", "mix.exs", "README.md", "CHANGELOG.md", "LICENSE"],
-      maintainers: ["El Werbitzky", "evuez <helloevuez@gmail.com>"],
+      maintainers: ["UrbanOS"],
       licenses: ["WTFPL-2"],
       links: %{
-        "Changelog" => "https://hexdocs.pm/elastix/changelog.html",
+        "Changelog" => "https://hexdocs.pm/elastix_search/changelog.html",
         "GitHub" => @source_url
       }
     ]
