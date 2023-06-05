@@ -2,7 +2,7 @@ defmodule Elastix.Mixfile do
   use Mix.Project
 
   @source_url "https://github.com/UrbanOS-Public/elastix_search"
-  @version "1.0.0"
+  @version "1.0.1"
 
   def project do
     [
@@ -32,7 +32,7 @@ defmodule Elastix.Mixfile do
       {:mix_test_watch, "~> 1.1", only: [:test, :dev]},
       {:poison, "~> 5.0", optional: true},
       {:httpoison, "~> 2.1"},
-      {:retry, "~> 0.18"}
+      {:retry, "~> 0.15"}
     ]
   end
 
